@@ -9,14 +9,23 @@ const createProdutIntoDB = async (product: Tproduct) => {
   return result;
 };
 // get all product and search fucntion too
-const getAllProductFromDB = async (searchTerm: unknown) => {
-  if (typeof searchTerm === 'string') {
-    const result = ProductModel.find({ $text: { $search: searchTerm } });
+const getAllProductFromDB = async (searchTerm?: string) => {
+  if (searchTerm && typeof searchTerm === 'string') {
+    const result = await ProductModel.find({ $text: { $search: searchTerm } });
     return result;
   }
   const result = await ProductModel.find();
   return result;
 };
+
+// const getAllProductFromDB = async (searchTerm: unknown) => {
+//   if (typeof searchTerm === 'string') {
+//     const result = ProductModel.find({ $text: { $search: searchTerm } });
+//     return result;
+//   }
+//   const result = await ProductModel.find();
+//   return result;
+// };
 
 // get single product
 const getSingleProductFromDB = async (id: string) => {

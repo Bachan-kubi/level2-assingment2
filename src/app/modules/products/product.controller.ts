@@ -24,25 +24,41 @@ const createProduct = async (req: Request, res: Response) => {
     });
   }
 };
-
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const searchTerm = req.query;
+    const searchTerm = req.query.searchTerm as string; 
     const result = await productServices.getAllProductFromDB(searchTerm);
     res.status(200).json({
       success: true,
-      msg: 'Product fetched successfull!',
+      msg: 'Products fetched successfully!',
       data: result,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     res.status(500).json({
       success: false,
-      msg: error.message || 'something wrong in fetching data',
+      msg: error.message || 'Something went wrong in fetching data',
       error: error,
     });
   }
 };
+// const getAllProducts = async (req: Request, res: Response) => {
+//   try {
+//     const searchTerm = req.query;
+//     const result = await productServices.getAllProductFromDB(searchTerm);
+//     res.status(200).json({
+//       success: true,
+//       msg: 'Product fetched successfull!',
+//       data: result,
+//     });
+//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   } catch (error: any) {
+//     res.status(500).json({
+//       success: false,
+//       msg: error.message || 'something wrong in fetching data',
+//       error: error,
+//     });
+//   }
+// };
 
 const getSingleProduct = async (req: Request, res: Response) => {
   try {

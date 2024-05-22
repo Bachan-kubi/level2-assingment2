@@ -45,7 +45,7 @@ const productSchema = new Schema<Tproduct>({
   variants: { type: [variantSchema], required: true },
   inventory: { type: inventorySchema, required: true },
 });
-// productSchema.index({ name: 'text', description: 'text', category: 'text', tags: 'text' });
+productSchema.index({ name: 'text', description: 'text', category: 'text', tags: 'text' });
 // Create the Product model
 const ProductModel: Model<Tproduct> = model<Tproduct>('Product', productSchema);
 

@@ -12,7 +12,7 @@ const inventoryValidationSchema = z.object({
 const variantsValidationSchema = z.object({
   type: z.string().min(1, 'type is required'),
   value: z.string().min(1, 'value is required'),
-})
+});
 
 export const productValidationSchema = z.object({
   name: z.string().min(1, 'Name is required'),
