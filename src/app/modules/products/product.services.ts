@@ -18,14 +18,6 @@ const getAllProductFromDB = async (searchTerm?: string) => {
   return result;
 };
 
-// const getAllProductFromDB = async (searchTerm: unknown) => {
-//   if (typeof searchTerm === 'string') {
-//     const result = ProductModel.find({ $text: { $search: searchTerm } });
-//     return result;
-//   }
-//   const result = await ProductModel.find();
-//   return result;
-// };
 
 // get single product
 const getSingleProductFromDB = async (id: string) => {
