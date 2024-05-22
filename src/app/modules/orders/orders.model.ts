@@ -22,19 +22,17 @@ const orderSchema = new Schema<TOrder>({
 });
 
 orderSchema.pre('save', async function (next) {
-  const result = await ProductModel.findById(this.productId);
+  const result = await ProductModel.findById(this.productId)
   if (!result) {
-    throw new Error('Product does not exist productId');
+    throw new Error('Product does not exists by this productId')
   }
-  // checks if the requested quantity is greater then the product quantity
-
+  // checks if the requested quantity is greater then the product quantity.
   const {
     inventory: { quantity },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  }: any = await ProductModel.findById(this.productId);
+  }: any = await ProductModel.findById(this.productId)
 
   if (quantity < this.quantity) {
-    throw new Error('Insufficient quantity available in inventory');
+    throw new Error('Insufficient quantity available in inventory')
   }
 
   // reduce the product quantity
@@ -46,16 +44,16 @@ orderSchema.pre('save', async function (next) {
       },
     },
     { new: true },
-  );
+  )
   // update the instock if quantity is 0
-  //   if (updatedProduct?.inventory.quantity === 0) {
-  //     await ProductModel.findByIdAndUpdate(this.productId, {
-  //       $set: {
-  //         'inventory.inStock': false,
-  //       },
-  //     })
-  //   }
-  //   next();
-});
+  if (updatedProduct?.inventory.quantity === 0) {
+    await ProductModel.findByIdAndUpdate(this.productId, {
+      $set: {
+        'inventory.inStock': false,
+      },
+    })
+  }
+  next();
+})
 
 export const Order = model<TOrder>('Order', orderSchema);
