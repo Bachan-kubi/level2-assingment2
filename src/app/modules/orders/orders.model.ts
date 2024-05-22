@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { TOrder } from './orders.interface';
 import ProductModel from '../products/product.model';
+import { any, number } from 'zod';
 
 const orderSchema = new Schema<TOrder>({
   email: {
@@ -45,14 +46,15 @@ orderSchema.pre('save', async function (next) {
     },
     { new: true },
   )
+  console.log(updatedProduct,"konta paitase");
   // update the instock if quantity is 0
-  if (updatedProduct?.inventory.quantity === 0) {
-    await ProductModel.findByIdAndUpdate(this.productId, {
-      $set: {
-        'inventory.inStock': false,
-      },
-    })
-  }
+  // if (updatedProduct?.inventory.quantity ==0) {
+  //   await ProductModel.findByIdAndUpdate(this.productId, {
+  //     $set: {
+  //       'inventory.inStock': false,
+  //     },
+  //   })
+  // }
   next();
 })
 

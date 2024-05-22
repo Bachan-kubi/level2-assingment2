@@ -1,6 +1,5 @@
-import { TOrder } from "./orders.interface"
-import { Order } from "./orders.model"
-
+import { TOrder } from "./orders.interface";
+import { Order } from "./orders.model";
 
 
 const createOrder = async (payLoad: TOrder) => {
