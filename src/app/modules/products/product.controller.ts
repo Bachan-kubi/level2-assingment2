@@ -1,11 +1,14 @@
 import { Request, Response } from 'express';
 import { productServices } from './product.services';
 import { Types } from 'mongoose';
+import { productValidationSchema } from './products.validation';
+
 
 const createProduct = async (req: Request, res: Response) => {
   try {
-    const products = req.body;
-    const result = await productServices.createProdutIntoDB(products);
+    const data = req.body;
+    const product = productValidationSchema.parse(data)
+    const result = await productServices.createProdutIntoDB(product);
     // return result;
     res.status(200).json({
       success: true,
@@ -65,8 +68,8 @@ const getSingleProduct = async (req: Request, res: Response) => {
 const updateSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    const updatedInfo = req.body;
-    console.log(productId, updatedInfo);
+    const data = req.body;
+    const updatedInfo= productValidationSchema.parse(data)
 
     const updatedProduct = await productServices.updateProductFromDB(
       productId,
@@ -100,7 +103,7 @@ const deleteProduct = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({
       success: false,
-      msg: error.message || 'something wrong',
+      msg: error.message || 'something wrong while deleting',
       error: error,
     });
     console.log(error);
