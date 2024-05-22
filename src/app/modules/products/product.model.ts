@@ -1,4 +1,4 @@
-import { Schema, model, connect, Model } from 'mongoose';
+import { Schema, model, Model } from 'mongoose';
 
 // Define the Variant type
 export type TVariant = {

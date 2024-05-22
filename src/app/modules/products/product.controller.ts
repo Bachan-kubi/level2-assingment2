@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { productServices } from './product.services';
-import { Types } from 'mongoose';
 import { productValidationSchema } from './products.validation';
+
 
 
 const createProduct = async (req: Request, res: Response) => {
@@ -15,13 +15,13 @@ const createProduct = async (req: Request, res: Response) => {
       msg: 'product collection created',
       data: result,
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     res.status(500).json({
       success: false,
       msg: error.message || 'something wrong',
       error: error,
     });
-    console.log(error);
   }
 };
 
@@ -34,20 +34,19 @@ const getAllProducts = async (req: Request, res: Response) => {
       msg: 'Product fetched successfull!',
       data: result,
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     res.status(500).json({
       success: false,
       msg: error.message || 'something wrong in fetching data',
       error: error,
     });
-    console.log(error);
   }
 };
 
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    console.log(productId, 'paina ken!');
     const result = await productServices.getSingleProductFromDB(productId);
 
     res.status(200).json({
@@ -55,13 +54,13 @@ const getSingleProduct = async (req: Request, res: Response) => {
       msg: 'Product fetched successfully!',
       data: result,
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     res.status(500).json({
       success: false,
       msg: error.message || 'something wrong',
       error: error,
     });
-    console.log(error);
   }
 };
 
@@ -80,13 +79,13 @@ const updateSingleProduct = async (req: Request, res: Response) => {
       msg: 'Product updated successfully!',
       data: updatedProduct,
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     res.status(500).json({
       success: false,
       msg: error.message || 'something wrong',
       error: error,
     });
-    console.log(error);
   }
 };
 
@@ -100,13 +99,13 @@ const deleteProduct = async (req: Request, res: Response) => {
       message: 'Product deleted successfully',
       data: deleteProductItem,
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     res.status(500).json({
       success: false,
       msg: error.message || 'something wrong while deleting',
       error: error,
     });
-    console.log(error);
   }
 };
 

@@ -21,12 +21,10 @@ const getAllProductFromDB = async (searchTerm: unknown) => {
 // get single product
 const getSingleProductFromDB = async (id: string) => {
   const result = await ProductModel.findOne({ _id: new Types.ObjectId(id) });
-  console.log(result);
   return result;
 };
 // updata a product
 const updateProductFromDB = async (id: string, updateInfo: Tproduct) => {
-  console.log(id);
   const result = await ProductModel.findByIdAndUpdate(
     { _id: id },
     { $set: updateInfo },
@@ -41,7 +39,6 @@ const deleteProductFromDB = async (id: string) => {
   return result;
 };
 
-const searchProduct = () => {};
 
 export const productServices = {
   createProdutIntoDB,

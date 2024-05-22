@@ -12,16 +12,12 @@ const createOrder = async (req: Request, res: Response) => {
       message: 'Order created successfully!',
       data: result,
     })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
-    if (err.name === 'ZodError') {
-      return res.status(500).json({
-        success: false,
-        message: err,
-      })
-    }
     res.status(500).json({
       success: false,
-      message: err.message,
+      message: "Failed to post product" ,
+      data: err.message
     })
   }
 }
